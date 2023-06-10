@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 20px;
+}
+
+@keyframes run {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: 50%;
+    }
+}
+
+#slider-container {
+    margin-left: 10px;
+    border: 1px solid black;
+    padding: 5px 0;
+    position: relative;
+    cursor: pointer;
+}
+
+#slider {
+    border: 1px solid red;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: red;
+}
+
+#option1,
+#option2 {
+    margin: 10px;
+}
