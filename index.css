@@ -1,12 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap');
+
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
+    --font-type: 'Playfair Display', serif;
     box-sizing: border-box;
 }
 
-button {
-    margin-top: 20px;
+h1 {
+    background-color: #6495ED;
+    color: white;
+    height: 100px;
+    font-size: 3rem;
+    display: flex;
+    padding-top: 10px;
+    padding-left: 15px;
+    font-family: var(--font-type);
 }
+
+#container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+
+#new-book {
+    padding: 5px 20px;
+    font-size: 40px;
+    width: auto;
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    background-color: #6495ED;
+    color: white;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+}
+
+.button-container span {
+    margin-top: 5px;
+}
+
 
 @keyframes run {
     0% {
@@ -15,26 +54,4 @@ button {
     100% {
         left: 50%;
     }
-}
-
-#slider-container {
-    margin-left: 10px;
-    border: 1px solid black;
-    padding: 5px 0;
-    position: relative;
-    cursor: pointer;
-}
-
-#slider {
-    border: 1px solid red;
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    background-color: red;
-}
-
-#option1,
-#option2 {
-    margin: 10px;
 }

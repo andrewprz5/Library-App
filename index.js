@@ -9,9 +9,7 @@ function Book(title, author, year, pages, read) {
     this.addBookToLibrary = function() {
         myLibrary.push(this);
         
-        const libraryContainer = document.getElementById("library-container");
-        libraryContainer.style.display = "flex";
-        libraryContainer.style.gap = "20px";
+        const container = document.getElementById("container");
 
         const div = document.createElement("div");
         div.style.height = "200px";
@@ -22,27 +20,52 @@ function Book(title, author, year, pages, read) {
         div.style.alignItems = "center";
         div.style.cursor = "pointer";
 
+        const infoDiv = document.createElement("div");
+        infoDiv.style.height = "300px";
+        infoDiv.style.width = "300px";
+        infoDiv.style.border = "1px solid black";
+
+        const p_Title = document.createElement("p");
+        p_Title.innerHTML = "Title: " + this.title + "";
+        const p_Author = document.createElement("p");
+        p_Author.innerHTML = "Author: " + this.author + "";
+        const p_Year = document.createElement("p");
+        p_Year.innerHTML = "Year: " + this.year + "";
+        const p_Pages = document.createElement("p");
+        p_Pages.innerHTML = "Total Pages: " + this.pages + "";
+        const p_Status = document.createElement("p");
+        p_Status.style.display = "flex";
+        p_Status.innerHTML = "Status: ";
+
+        const sliderContainer = document.createElement("div");
+        sliderContainer.className = "slider-container";
+        sliderContainer.style.marginLeft = "10px";
+        sliderContainer.style.border = "1px solid black";
+        sliderContainer.style.padding = "5px";
+        sliderContainer.style.position = "relative";
+        sliderContainer.style.cursor = "pointer";
+        sliderContainer.style.wordSpacing = "0.7rem";
+        sliderContainer.innerHTML = "<span>Read</span> <span>Unread</span>";
+
+        const slider = document.createElement("div");
+        slider.className = "slider"
+        slider.style.border = "1px solid red";
+        slider.style.width = "50%";
+        slider.style.height = "100%";
+        slider.style.position = "absolute";
+        slider.style.top = "0";
+        if (this.read == Boolean(true)) {
+            slider.style.right = "0";
+        } else {
+            slider.style.left = "0";
+        }
+        slider.style.backgroundColor = "red";
+
         for (let i = myLibrary.length - 1; i < myLibrary.length; i++) {
             const h2 = document.createElement("h2");
             h2.innerHTML = myLibrary[i].title + "";
             div.appendChild(h2);
-            libraryContainer.appendChild(div);
-
-            const infoDiv = document.createElement("div");
-            infoDiv.style.height = "300px";
-            infoDiv.style.width = "300px";
-            infoDiv.style.border = "1px solid black";
-            const p_Title = document.createElement("p");
-            p_Title.innerHTML = "Title: " + this.title + "";
-            const p_Author = document.createElement("p");
-            p_Author.innerHTML = "Author: " + this.author + "";
-            const p_Year = document.createElement("p");
-            p_Year.innerHTML = "Year: " + this.year + "";
-            const p_Pages = document.createElement("p");
-            p_Pages.innerHTML = "Total Pages: " + this.pages + "";
-            const p_Status = document.createElement("p");
-            p_Status.style.display = "flex";
-            p_Status.innerHTML = "Status: <div id='slider-container'><div id='slider'></div><span id='option1'>Read</span><span id='option2'>Unread</span></div>"
+            container.appendChild(div);
         
             const deleteBtn = document.createElement("button");
             deleteBtn.innerHTML = "Delete Book";
@@ -52,6 +75,9 @@ function Book(title, author, year, pages, read) {
                 infoDiv.remove();
             }, false);
 
+            sliderContainer.appendChild(slider);
+            p_Status.appendChild(sliderContainer);
+
             infoDiv.appendChild(p_Title);
             infoDiv.appendChild(p_Author);
             infoDiv.appendChild(p_Year);
@@ -59,35 +85,30 @@ function Book(title, author, year, pages, read) {
             infoDiv.appendChild(p_Status);
             infoDiv.appendChild(deleteBtn);
 
-            div.addEventListener("click", bookInfo, false);
-        
-            function bookInfo() {
-                div.style.display = "none";
-                libraryContainer.appendChild(infoDiv);
-                const sliderContainer = document.querySelector("#slider-container");
-                const slider = document.querySelector("#slider");   
-                sliderContainer.addEventListener("click", function() {
-                   
-                    if (myLibrary[i].read == Boolean(true)) {
-                        slider.style.left = "0";
-                        slider.style.right = "";
-                        myLibrary[i].read = Boolean(false);
-                        
-                    } else if (myLibrary[i].read == Boolean(false)) {
-                        slider.style.left = "";
-                        slider.style.right = "0";
-                        myLibrary[i].read = Boolean(true);
-                    }
-                });
-                
+            sliderContainer.addEventListener('click', function() {
                 if (myLibrary[i].read == Boolean(true)) {
-                    slider.style.right = "0";
-                } else {
+                    console.log(myLibrary[i].read);
                     slider.style.left = "0";
+                    slider.style.right = "";
+                    myLibrary[i].read = Boolean(false);
+                    
+                } else if (myLibrary[i].read == Boolean(false)) {
+                    console.log(myLibrary[i].read);
+                    slider.style.left = "";
+                    slider.style.right = "0";
+                    myLibrary[i].read = Boolean(true);
                 }
-                
-            }
+            });
+
+        };
+
+        div.addEventListener("click", bookInfo, false);
+
+        function bookInfo() {
+            div.style.display = "none";
+            container.appendChild(infoDiv);
         }
+        
     }
 };
 
