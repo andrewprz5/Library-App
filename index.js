@@ -117,9 +117,6 @@ function openForm() {
                 input.rows = field.rows || 4;
             } else {
                 input = document.createElement("input");
-                input.setAttribute('type', field.type);
-                input.setAttribute('id', field.id);
-                input.setAttribute('name', field.name);
                 if (field.required) {
                     input.setAttribute('required', '');
                 }
@@ -127,6 +124,10 @@ function openForm() {
                     input.setAttribute('min', field.min || '');
                 }
             } input.style.cssText = "margin-top: 5px; border: 1px solid white; padding: 2px; border-radius: 5px";
+
+            input.setAttribute('type', field.type);
+            input.setAttribute('id', field.id);
+            input.setAttribute('name', field.name);
     
             form.appendChild(label);
             form.appendChild(input);
@@ -156,8 +157,11 @@ function openForm() {
             `;
 
             book.innerHTML = content;
-            book.style.color = "white";
+            containerDiv.appendChild(book);
+            formContainer.style.display = "none";
+            containerDiv.style.display = "flex";
 
+            form.reset();
         })
 
         formContainer.appendChild(form);
