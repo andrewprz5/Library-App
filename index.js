@@ -159,7 +159,13 @@ function openForm() {
             book.innerHTML = content;
             containerDiv.appendChild(book);
             formContainer.style.display = "none";
-            containerDiv.style.display = "flex";
+            containerDiv.style.cssText = "display: flex; gap: 50px; margin: 70px 50px 0px 50px; justify-content: flex-start; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 70px; align-content: flex-start";
+            fbDiv.style.width = "max-content";
+            fbDiv.style.order = "2";
+            const eleToRemove = document.querySelector('.add-here');
+            if (eleToRemove) {
+                eleToRemove.remove();
+            }
 
             form.reset();
         })
@@ -172,6 +178,7 @@ function openForm() {
 
 function firstBook() {
     const fbText = document.createElement("p");
+    fbText.classList.add('add-here');
     containerDiv.appendChild(fbDiv);
     fbDiv.appendChild(fbText);
     containerDiv.style.cssText = "display: flex; justify-content: center; align-items: center";
