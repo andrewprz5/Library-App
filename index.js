@@ -4,6 +4,10 @@ const body = document.querySelector('body');
 // container
 const containerDiv = document.getElementById("container");
 
+// form container
+
+const formContainer = document.createElement('div');
+
 // form 
 const form = document.createElement("form");
 
@@ -64,8 +68,13 @@ class addBook extends Button {
         addBtn.style.margin = "auto";
         fbDiv.appendChild(addBtn);
         addBtn.addEventListener("click", function() {
-            openForm();
-        })
+            if(form.id) {
+                formContainer.style.display = "flex";
+                containerDiv.style.display = "none";
+            } else {
+                openForm();
+            }
+        });
     }
 }
 
@@ -77,7 +86,6 @@ function openForm() {
     const submitForm = new submit("submitForm", "Submit", "40px", "75px");
     submitForm.design();
     // create form container + h2
-    const formContainer = document.createElement('div');
     formContainer.style.cssText = "display: flex; flex-direction: column; justify-content: space-evenly; align-items: flex-start; margin: auto; min-height: 600px; width: 600px; padding: 20px 50px 80px 50px; border: 1px solid #373333; border-radius: 20px; position: relative";
     const h2 = document.createElement('h2');
     h2.textContent = "Enter Book Information";
