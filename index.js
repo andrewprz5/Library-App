@@ -81,6 +81,36 @@ class addBook extends Button {
 
 const newBook = new addBook("addBook", "+", "60px", "60px");
 
+class Book {
+    constructor(title, author, year, genre, pages, description, read) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.genre = genre;
+        this.pages = pages;
+        this.description = description;
+        this.read = read;
+    }
+
+    createEle() {
+        const book = document.createElement("div");
+        const content = `
+        <h3 style="font-size: 1.5rem;">${this.title}</h3>
+        <br>
+        <p>Author: ${this.author}</p>
+        <p>Year: ${this.year}</p>
+        <p>Genre: ${this.genre}</p>
+        <p>Pages: ${this.pages}</p>
+        <p>Description: ${this.description}</p>
+        <p>Read: ${this.read}</p>
+        `;
+        book.innerHTML = content;
+        containerDiv.appendChild(book);
+    }
+
+
+};
+
 function openForm() {
     // submitForm button
     const submitForm = new submit("submitForm", "Submit", "40px", "75px");
@@ -153,19 +183,9 @@ function openForm() {
             const description = document.getElementById('description').value;
             const read = document.getElementById('read').value;
 
-            const book = document.createElement("div");
-            const content = `
-                <h3>${title}</h3>
-                <p>Author: ${author}</p>
-                <p>Year: ${year}</p>
-                <p>Genre: ${genre}</p>
-                <p>Pages: ${pages}</p>
-                <p>Description: ${description}</p>
-                <p>Read: ${read}</p>
-            `;
+            const book = new Book(title, author, year, genre, pages, description, read);
+            book.createEle();
 
-            book.innerHTML = content;
-            containerDiv.appendChild(book);
             formContainer.style.display = "none";
             containerDiv.style.cssText = "display: flex; gap: 50px; margin: 70px 50px 0px 50px; justify-content: flex-start; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 70px; align-content: flex-start";
             fbDiv.style.width = "max-content";
@@ -197,3 +217,7 @@ function firstBook() {
 }
 
 firstBook();
+
+/* to-do 
+- description affecting div width
+*/
