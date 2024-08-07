@@ -220,4 +220,5 @@ firstBook();
 
 /* to-do 
 - description affecting div width
+- flex layout
 */
