@@ -187,7 +187,7 @@ function openForm() {
             book.createEle();
 
             formContainer.style.display = "none";
-            containerDiv.style.cssText = "display: flex; gap: 50px; margin: 70px 50px 0px 50px; justify-content: flex-start; flex-direction: row; flex-wrap: wrap; align-items: center; margin-top: 70px; align-content: flex-start";
+            containerDiv.style.cssText = "display: grid; grid-template-columns: repeat(3, minmax(200px, 1fr)); gap: 50px; margin: 35px 50px 0px; justify-items: start; align-items: center;";
             fbDiv.style.width = "max-content";
             fbDiv.style.order = "2";
             const eleToRemove = document.querySelector('.add-here');
@@ -219,6 +219,5 @@ function firstBook() {
 firstBook();
 
 /* to-do 
-- description affecting div width
-- flex layout
+- adjust grid layout
 */
