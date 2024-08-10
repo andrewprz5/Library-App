@@ -187,7 +187,7 @@ function openForm() {
             book.createEle();
 
             formContainer.style.display = "none";
-            containerDiv.style.cssText = "display: grid; grid-template-columns: repeat(3, minmax(200px, 1fr)); gap: 50px; margin: 35px 50px 0px; justify-items: start; align-items: center;";
+            containerDiv.style.cssText = "display: grid; grid-template-columns: repeat(4, minmax(250px, 1fr)); grid-auto-rows: min-content; gap: 65px; padding: 25px; place-items: center start;";
             fbDiv.style.width = "max-content";
             fbDiv.style.order = "2";
             const eleToRemove = document.querySelector('.add-here');

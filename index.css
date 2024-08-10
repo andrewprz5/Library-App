@@ -31,12 +31,14 @@ body {
 
 #container div {
     overflow: scroll;
+    line-height: 1.4;
 }
 
 h1 {
     padding: 25px;
     font-weight: 800;
     width: 100%;
+    margin-bottom: 50px;
 }
 
 
