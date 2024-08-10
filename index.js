@@ -78,6 +78,25 @@ class addBook extends Button {
     }
 }
 
+class dele8 extends Button {
+    constructor(id, text, height, width) {
+        super(id, text, height, width); 
+    }
+
+    design() {
+        const deleteBtn = this.createEle();
+        deleteBtn.style.border = "none";
+        deleteBtn.style.margin = "auto";
+        deleteBtn.addEventListener("click", function() {
+            const bookToGo = document.getElementById(this.id);
+            if(bookToGo) {
+                bookToGo.remove();
+            }
+        })
+        return deleteBtn;
+    }
+}
+
 
 const newBook = new addBook("addBook", "+", "60px", "60px");
 
@@ -94,6 +113,15 @@ class Book {
 
     createEle() {
         const book = document.createElement("div");
+        function formatString(str) {
+            let noSpaces = str.replace(/\s+/g, '');
+
+            let lowerCaseString = noSpaces.toLowerCase();
+
+            return lowerCaseString;
+        }
+        book.id = '' + formatString(this.title);
+        const deleteBtn = new dele8(`${book.id}`, "Delete", "max-content", "max-content");
         const content = `
         <h3 style="font-size: 1.5rem;">${this.title}</h3>
         <br>
@@ -103,8 +131,10 @@ class Book {
         <p>Pages: ${this.pages}</p>
         <p>Description: ${this.description}</p>
         <p>Read: ${this.read}</p>
+        <br>
         `;
         book.innerHTML = content;
+        book.appendChild(deleteBtn.design());
         containerDiv.appendChild(book);
     }
 
@@ -203,7 +233,6 @@ function openForm() {
     body.appendChild(formContainer);
 }
 
-
 function firstBook() {
     const fbText = document.createElement("p");
     fbText.classList.add('add-here');
@@ -219,5 +248,5 @@ function firstBook() {
 firstBook();
 
 /* to-do 
-- adjust grid layout
+- toggle read status
 */
