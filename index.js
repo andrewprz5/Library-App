@@ -151,7 +151,7 @@ class Book {
             }
         })
     
-        changeEle.style.marginLeft = "10px";
+        changeEle.style.marginLeft = "15px";
         book.appendChild(deleteEle);
         book.appendChild(changeEle);
        
