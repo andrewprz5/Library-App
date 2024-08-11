@@ -78,25 +78,24 @@ class addBook extends Button {
     }
 }
 
-class dele8 extends Button {
+class Action extends Button {
     constructor(id, text, height, width) {
-        super(id, text, height, width); 
+        super(id, text, height, width);
     }
 
     design() {
-        const deleteBtn = this.createEle();
-        deleteBtn.style.border = "none";
-        deleteBtn.style.margin = "auto";
-        deleteBtn.addEventListener("click", function() {
-            const bookToGo = document.getElementById(this.id);
-            if(bookToGo) {
-                bookToGo.remove();
-            }
-        })
-        return deleteBtn;
+        const changeBtn = this.createEle();
+        changeBtn.style.border = "none";
+        changeBtn.style.margin = "auto";
+        return changeBtn;
+    }
+
+    addEventListener(eventType, callback) {
+        const btn = this.design();
+        btn.addEventListener(eventType, callback);
+        return btn;
     }
 }
-
 
 const newBook = new addBook("addBook", "+", "60px", "60px");
 
@@ -112,7 +111,6 @@ class Book {
     }
 
     createEle() {
-        const book = document.createElement("div");
         function formatString(str) {
             let noSpaces = str.replace(/\s+/g, '');
 
@@ -120,8 +118,11 @@ class Book {
 
             return lowerCaseString;
         }
+        
+        const book = document.createElement("div");
         book.id = '' + formatString(this.title);
-        const deleteBtn = new dele8(`${book.id}`, "Delete", "max-content", "max-content");
+        const deleteBtn = new Action(`${book.id}-delete`, "Delete", "max-content", "max-content");
+        const changeBtn = new Action(`${book.id}-change`, "Change Status", "max-content", "max-content");
         const content = `
         <h3 style="font-size: 1.5rem;">${this.title}</h3>
         <br>
@@ -134,7 +135,26 @@ class Book {
         <br>
         `;
         book.innerHTML = content;
-        book.appendChild(deleteBtn.design());
+        const deleteEle = deleteBtn.addEventListener('click', function() {
+            const deleteBook = document.getElementById(book.id);
+            deleteBook.remove();
+        })
+
+        const changeEle = changeBtn.addEventListener('click', function() {
+            const lastParagraph = book.querySelector("p:last-of-type");
+            if(lastParagraph.textContent === "Read: Fully Read") {
+                lastParagraph.textContent = "Read: Not Read Yet";
+            } else if (lastParagraph.textContent === "Read: Partially Read") {
+                lastParagraph.textContent = "Read: Fully Read";
+            } else {
+                lastParagraph.textContent = "Read: Partially Read";
+            }
+        })
+    
+        changeEle.style.marginLeft = "10px";
+        book.appendChild(deleteEle);
+        book.appendChild(changeEle);
+       
         containerDiv.appendChild(book);
     }
 
@@ -247,6 +267,4 @@ function firstBook() {
 
 firstBook();
 
-/* to-do 
-- toggle read status
-*/
+
